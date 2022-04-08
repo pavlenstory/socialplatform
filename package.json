@@ -1,0 +1,25 @@
+{
+  "name": "socialplatform",
+  "version": "1.0.0",
+  "description": "MongoDB(Atlas), Express, React, Node.js, GraphQL (Apollo), mongoose",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pavlenstory/socialplatform.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pavlenstory/socialplatform/issues"
+  },
+  "homepage": "https://github.com/pavlenstory/socialplatform#readme",
+  "dependencies": {
+    "apollo-server": "^3.6.7",
+    "graphql": "^16.3.0",
+    "mongoose": "^6.2.10"
+  }
+}
