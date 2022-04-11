@@ -4,7 +4,7 @@
   "description": "MongoDB(Atlas), Express, React, Node.js, GraphQL (Apollo), mongoose",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon index"
   },
   "repository": {
     "type": "git",
@@ -19,7 +19,12 @@
   "homepage": "https://github.com/pavlenstory/socialplatform#readme",
   "dependencies": {
     "apollo-server": "^3.6.7",
+    "bcryptjs": "^2.4.3",
     "graphql": "^16.3.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.10"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }
