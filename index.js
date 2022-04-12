@@ -4,7 +4,6 @@ const {MONGODB} = require('./config')
 const resolvers = require('./graphql/resolvers/index')
 const typeDefs = require('./graphql/typeDefs')
 
-
 const server = new ApolloServer({
     typeDefs,
     resolvers,
@@ -19,4 +18,3 @@ mongoose.connect(MONGODB, {useNewUrlParser: true})
 .then((res) => {
     console.log(`Server running at ${res.url}`)
 })
-
