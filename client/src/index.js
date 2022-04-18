@@ -10,15 +10,17 @@ import {
 
 const client = new ApolloClient({
   connectToDevTools: true,
-  uri: 'http:localhost:5002',
+  uri: 'http://localhost:5002',
   cache: new InMemoryCache()
 });
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-<ApolloProvider client={client}>
-  <App />
-</ApolloProvider>
+<React.StrictMode>
+  <ApolloProvider client={client}>
+    <App />
+  </ApolloProvider>
+</React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
