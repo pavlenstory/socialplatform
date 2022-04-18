@@ -4,6 +4,7 @@
   "description": "MongoDB(Atlas), Express, React, Node.js, GraphQL (Apollo), mongoose",
   "main": "index.js",
   "scripts": {
+    "serve": "node index",
     "dev": "nodemon index"
   },
   "repository": {
