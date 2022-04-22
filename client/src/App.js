@@ -1,19 +1,20 @@
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { Routes, Route } from "react-router-dom";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+import Home from "./pages/Home";
+import MenuBar from "./comonents/MenuBar";
 
-import Register from './pages/Register';
-import Login from './pages/Login';
-import Home from './pages/Home';
-
-function App(){
-    return (
-        <Router>
-            <Routes>
-                <Route exact path='/' component={Home}/>
-                <Route exact path='/login' component={Login}/>
-                <Route exact path='/register' component={Register}/>
-            </Routes>
-        </Router>
-    )
+function App() {
+  return (
+    <>
+      <MenuBar />
+      <Routes>
+        <Route path="" element={<Home />} />
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
+      </Routes>
+    </>
+  );
 }
 
 export default App;
