@@ -1,18 +1,39 @@
 import { Card, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import moment from "moment";
 
 function PostCard({ post }) {
+  const {
+    id,
+    body,
+    createdAt,
+    username,
+    likeCount,
+    commentCount,
+    likes,
+    comments,
+  } = post;
+
+  function likePost() {}
+  function commentPost() {}
   return (
-    <Card style={{ width: "18rem" }} key={post.id}>
-      <Card.Img variant="top" src="holder.js/100px180" />
+    <>
       <Card.Body>
-        <Card.Title>Card Title</Card.Title>
-        <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
+        <Card.Img src="holder.js/100px180" />
+        <Card.Title>{username}</Card.Title>
+        <Card.Text as={Link} to={`posts/${id}`} bg="dark" variant="dark">
+          {moment(createdAt).fromNow(true)}
         </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
+        <Card.Body>{body}</Card.Body>
+        <Button variant="primary" onClick={likePost}>
+          Like button
+        </Button>
+        <Button variant="primary" onClick={commentPost}>
+          Comment post
+        </Button>
+        {likeCount}
       </Card.Body>
-    </Card>
+    </>
   );
 }
 
