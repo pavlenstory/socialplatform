@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Form, Button } from "react-bootstrap";
 import { gql, useMutation } from "@apollo/client";
 import MenuSpinner from "../comonents/Spinner";
 import { useForm } from "../util/hooks";
 import FormElement from "../comonents/FormElement";
+import { AuthContext } from "../context/auth";
 
 function Register(props) {
+  const context = useContext(AuthContext);
   const [errors, setErrors] = useState({});
 
   const { onChange, onSubmit, values, history } = useForm(registerUser, {
@@ -16,11 +18,11 @@ function Register(props) {
   });
 
   const [addUser, { data, loading, error }] = useMutation(REGISTER_USER, {
-    update() {
+    update(cache, { data: { register: userData } }) {
+      context.login(userData);
       history("/");
     },
     onError(err) {
-      console.log(err.graphQLErrors[0].extensions.errors);
       setErrors(err.graphQLErrors[0].extensions.errors);
     },
     variables: values,
@@ -30,7 +32,7 @@ function Register(props) {
     addUser();
   }
 
-  //need to add loading
+  //todo: need to add loading
   return (
     <>
       {false ? (

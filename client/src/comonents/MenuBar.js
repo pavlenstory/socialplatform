@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
-
+import { AuthContext } from "../context/auth";
 function MenuBar() {
+  const { user, logout } = useContext(AuthContext);
   const pathname = window.location.pathname;
   const path = pathname === "/" ? "home" : pathname.substr(1);
   const [activeItem] = useState(path);
@@ -16,14 +17,27 @@ function MenuBar() {
           </Nav.Link>
         </Nav>
         <Navbar.Collapse className="justify-content-end">
-          <Nav>
-            <Nav.Link href="login" active={activeItem === "login"}>
-              Login
-            </Nav.Link>
-            <Nav.Link href="register" active={activeItem === "register"}>
-              Register
-            </Nav.Link>
-          </Nav>
+          {user ? (
+            <Nav>
+              <Nav.Link href="/">{user.username}</Nav.Link>
+              <Nav.Link
+                href="login"
+                active={activeItem === "register"}
+                onClick={logout}
+              >
+                Logout
+              </Nav.Link>
+            </Nav>
+          ) : (
+            <Nav>
+              <Nav.Link href="login" active={activeItem === "login"}>
+                Login
+              </Nav.Link>
+              <Nav.Link href="register" active={activeItem === "register"}>
+                Register
+              </Nav.Link>
+            </Nav>
+          )}
         </Navbar.Collapse>
       </Container>
     </Navbar>

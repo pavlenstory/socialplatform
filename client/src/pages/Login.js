@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Form, Button } from "react-bootstrap";
 import { gql, useMutation } from "@apollo/client";
 import MenuSpinner from "../comonents/Spinner";
 import { useForm } from "../util/hooks";
 import FormElement from "../comonents/FormElement";
+import { AuthContext } from "../context/auth";
 
 function Login() {
+  const context = useContext(AuthContext);
   const [errors, setErrors] = useState({});
 
   const { onChange, onSubmit, values, history } = useForm(loginUserCallBack, {
@@ -14,7 +16,8 @@ function Login() {
   });
 
   const [LoginUser, { data, loading, error }] = useMutation(LOGIN_USER, {
-    update() {
+    update(cache, { data: { login: userData } }) {
+      context.login(userData);
       history("/");
     },
     onError(err) {
@@ -27,10 +30,7 @@ function Login() {
     LoginUser();
   }
 
-  const isInvalidUsernameField = errors.username ? true : false;
-  const isInvalidPasswordField = errors.password ? true : false;
-  console.log(loading);
-  //need to add loading
+  //todo: need to add loading
   return (
     <>
       {false ? (
