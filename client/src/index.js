@@ -1,13 +1,32 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
 import { BrowserRouter } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+const httpLink = createHttpLink({
+  uri: "http://localhost:5002",
+});
+
+const authLink = setContext(() => {
+  const token = localStorage.getItem("jwtToken");
+  return {
+    headers: {
+      Authorization: token ? `Bearer ${token}` : "",
+    },
+  };
+});
+
 const client = new ApolloClient({
   connectToDevTools: true,
-  uri: "http://localhost:5002",
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 
@@ -21,7 +40,3 @@ root.render(
     </ApolloProvider>
   </React.StrictMode>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
